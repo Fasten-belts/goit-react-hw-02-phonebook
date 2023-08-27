@@ -18,16 +18,16 @@ export class App extends Component {
 
   addContact = newContact => {
     const { contacts } = this.state;
-    const isNewContact = contacts.some(
+    const oldContact = contacts.some(
       contact => contact.name.toLowerCase() === newContact.name.toLowerCase()
     );
 
-    if (isNewContact) {
-      alert(`${newContact.name} is already in contacts.`);
-    } else {
+    if (!oldContact) {
       this.setState(prevState => ({
         contacts: [...prevState.contacts, { id: nanoid(), ...newContact }],
       }));
+    } else {
+      alert(`${newContact.name} is already in contacts.`);
     }
   };
 
