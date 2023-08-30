@@ -28,14 +28,16 @@ const FormSchema = Yup.object().shape({
 });
 
 export const ContactForm = ({ onAddContact }) => {
+  const handleSubmit = (values, { resetForm }) => {
+    onAddContact(values);
+    resetForm();
+  };
+
   return (
     <Formik
       initialValues={{ name: '', number: '' }}
       validationSchema={FormSchema}
-      onSubmit={(values, actions) => {
-        onAddContact(values);
-        actions.resetForm();
-      }}
+      onSubmit={handleSubmit}
     >
       <StyledForm>
         <h1>Phonebook</h1>
